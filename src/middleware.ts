@@ -9,6 +9,11 @@ export default withAuth(
     const isAuthPage =
       req.nextUrl.pathname.startsWith('/signin') ||
       req.nextUrl.pathname.startsWith('/signup');
+    const isApi = req.nextUrl.pathname.startsWith('/api');
+
+    if (isApi) {
+      return NextResponse.next();
+    }
 
     if (isAuthPage && isAuth) {
       return NextResponse.redirect(new URL('/dashboard', req.url));
