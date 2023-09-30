@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { z as validator } from 'zod';
 
-import { insertRegister } from '@/collections/user';
+import { findOneUserByParams, insertUser } from '@/collections/user';
 
 export async function POST(req: Request) {
   const schema: any = validator
@@ -13,7 +13,7 @@ export async function POST(req: Request) {
     })
     .refine((data) => data.password === data.confirmPassword, {
       message: "Passwords don't match",
-      path: ['confirm'],
+      path: ['confirmPassword'],
     });
 
   const formData = await req.json();
@@ -29,8 +29,28 @@ export async function POST(req: Request) {
     );
   }
 
+  const [findEmail, findUsername] = await Promise.all([
+    findOneUserByParams({ email: formData.email }),
+    findOneUserByParams({ username: formData.username }),
+  ]);
+  if (findEmail || findUsername) {
+    return NextResponse.json(
+      {
+        success: false,
+        error: [
+          findEmail && { message: 'Email already exists', path: ['email'] },
+          findUsername && {
+            message: 'Username already exists',
+            path: ['username'],
+          },
+        ],
+      },
+      { status: 400 },
+    );
+  }
+
   const { username, email, password } = response.data;
-  insertRegister({ username, email, password });
+  insertUser({ username, email, password });
 
   return NextResponse.json({ success: true });
 }
