@@ -1,27 +1,41 @@
 'use client';
 
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Alert from '@mui/material/Alert';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Checkbox from '@mui/material/Checkbox';
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
-import FormControlLabel from '@mui/material/FormControlLabel';
 import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import { useRouter } from 'next/navigation';
+import { signIn } from 'next-auth/react';
 import * as React from 'react';
+import { useState } from 'react';
 
 export default function SignIn() {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const [signinError, setSigninError] = useState<boolean>(false);
+  const router = useRouter();
+
+  // eslint-disable-next-line consistent-return
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
+    const signinId = data?.get('signinId') as string;
+    const idForSignin = signinId.includes('@') ? 'email' : 'username';
+    const signinRequest = await signIn('credentials', {
+      redirect: false,
+      [idForSignin]: signinId,
+      password: data?.get('password') as string,
     });
+
+    if (!signinRequest?.error) {
+      return router.replace('/');
+    }
+    setSigninError(true);
   };
 
   return (
@@ -42,6 +56,11 @@ export default function SignIn() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
+          {signinError && (
+            <Alert severity="error">
+              Your email/username or password is incorrect. Please try again.
+            </Alert>
+          )}
           <Box
             component="form"
             onSubmit={handleSubmit}
@@ -52,10 +71,9 @@ export default function SignIn() {
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              id="signinId"
+              label="Email Address / Username"
+              name="signinId"
               autoFocus
             />
             <TextField
@@ -66,11 +84,6 @@ export default function SignIn() {
               label="Password"
               type="password"
               id="password"
-              autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
             />
             <Button
               type="submit"

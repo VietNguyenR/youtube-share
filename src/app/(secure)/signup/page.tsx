@@ -10,9 +10,16 @@ import Grid from '@mui/material/Grid';
 import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import { useRouter } from 'next/navigation';
 import * as React from 'react';
+import { useState } from 'react';
+
+import { isFieldError } from '@/utils/zodFieldError';
 
 export default function SignUp() {
+  const [errorsMessage, setErrorsMessage] = useState<Record<string, any>[]>([]);
+  const router = useRouter();
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -25,9 +32,9 @@ export default function SignUp() {
       },
       body: payload,
     });
-
-    console.log(payload);
-    console.log(signupRequest);
+    const { error: errorsResponse } = await signupRequest.json();
+    if (!errorsResponse) router.push('/signin');
+    setErrorsMessage(errorsResponse);
   };
 
   return (
@@ -57,6 +64,7 @@ export default function SignUp() {
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
+                  {...isFieldError('username', errorsMessage)}
                   name="username"
                   required
                   fullWidth
@@ -67,16 +75,17 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  {...isFieldError('email', errorsMessage)}
                   required
                   fullWidth
                   id="email"
                   label="Email Address"
                   name="email"
-                  autoComplete="email"
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  {...isFieldError('password', errorsMessage)}
                   required
                   fullWidth
                   name="password"
@@ -87,6 +96,7 @@ export default function SignUp() {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                  {...isFieldError('confirmPassword', errorsMessage)}
                   required
                   fullWidth
                   name="confirmPassword"
