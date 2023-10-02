@@ -13,6 +13,9 @@ const VideosSchema: Schema = new Schema({
     type: String,
     required: true,
   },
+  shared_by: {
+    type: String,
+  },
   created_at: {
     type: Date,
   },

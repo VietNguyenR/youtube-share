@@ -6,6 +6,7 @@ import { getServerSession } from 'next-auth/next';
 
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import { Footer } from '@/components/Footer';
+import { Hero } from '@/components/Hero';
 import { TopHeader } from '@/components/TopHeader';
 
 import Provider from '../context/client-provider';
@@ -32,6 +33,7 @@ export default async function RootLayout({
           />
           <CssBaseline />
           <TopHeader />
+          <Hero />
           {children}
           <Footer />
         </Provider>
