@@ -1,5 +1,6 @@
 'use client';
 
+import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import AppBar from '@mui/material/AppBar';
 import Button from '@mui/material/Button';
 import Toolbar from '@mui/material/Toolbar';
@@ -19,7 +20,9 @@ export function TopHeader() {
     >
       <Toolbar sx={{ flexWrap: 'wrap' }}>
         <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
-          Youtube Sharing App
+          <Button href="/" startIcon={<PlayCircleIcon />} size="large">
+            Youtube Sharing App
+          </Button>
         </Typography>
         <Typography>{userData?.user?.email}</Typography>
         {authenticated ? (
