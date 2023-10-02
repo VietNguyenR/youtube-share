@@ -22,18 +22,18 @@ export const insertVideo = async (params: VideoItemProps) => {
       created_at: getTimestamp(),
     });
   } catch (error: any) {
-    throwErrors(`Users collection: ${error}`);
+    throwErrors(`insertVideo: ${error}`);
   }
 };
 
 export const findVideosByParams = async (
-  params: VideoItemProps,
+  params: Record<string, any> = {},
   options: Record<string, any> = {},
 ) => {
   try {
     await connectToDatabase();
     return await VideosModel.find(params, options);
   } catch (error: any) {
-    throwErrors(`Users collection: ${error}`);
+    throwErrors(`findVideosByParams: ${error}`);
   }
 };

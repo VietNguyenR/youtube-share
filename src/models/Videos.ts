@@ -21,4 +21,4 @@ const VideosSchema: Schema = new Schema({
   },
 });
 
-export const VideosModel = models.User || model('User', VideosSchema);
+export const VideosModel = models.Videos || model('Videos', VideosSchema);
