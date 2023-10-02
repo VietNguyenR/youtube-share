@@ -23,6 +23,7 @@ export default function SignIn() {
   // eslint-disable-next-line consistent-return
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setSigninError(false);
     const data = new FormData(event.currentTarget);
     const signinId = data?.get('signinId') as string;
     const idForSignin = signinId.includes('@') ? 'email' : 'username';

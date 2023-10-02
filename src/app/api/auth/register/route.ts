@@ -30,8 +30,8 @@ export async function POST(req: Request) {
   }
 
   const [findEmail, findUsername] = await Promise.all([
-    findOneUserByParams({ email: formData.email }),
-    findOneUserByParams({ username: formData.username }),
+    findOneUserByParams({ filter: { email: formData.email } }),
+    findOneUserByParams({ filter: { username: formData.username } }),
   ]);
   if (findEmail || findUsername) {
     return NextResponse.json(
