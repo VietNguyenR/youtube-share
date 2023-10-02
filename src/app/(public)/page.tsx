@@ -9,7 +9,7 @@ import { VideoList } from '@/components/Videos/List';
 import type { VideoItemResponseProps } from '@/shared/type';
 
 export default function Home() {
-  const [videos, setVideos] = useState<VideoItemResponseProps[]>([]);
+  const [videos, setVideos] = useState<VideoItemResponseProps[] | undefined>();
 
   useEffect(() => {
     (async () => {
@@ -19,7 +19,7 @@ export default function Home() {
     })();
   }, []);
 
-  if (!videos.length) return <Loader />;
+  if (!videos) return <Loader />;
 
   return (
     <Container maxWidth="md" component="main">

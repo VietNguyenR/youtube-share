@@ -7,15 +7,7 @@ import { Copyright } from './Copyright';
 
 export function Footer() {
   return (
-    <Container
-      maxWidth="md"
-      component="footer"
-      sx={{
-        borderTop: (theme) => `1px solid ${theme.palette.divider}`,
-        mt: 8,
-        py: [3, 6],
-      }}
-    >
+    <Container maxWidth="md" component="footer">
       <Copyright sx={{ mt: 5 }} />
     </Container>
   );
