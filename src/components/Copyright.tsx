@@ -11,8 +11,8 @@ export function Copyright(props: any) {
       {...props}
     >
       {'Copyright © '}
-      <Link color="inherit" href="https://google.com/">
-        Youtube Sharing App
+      <Link color="inherit" href="https://www.linkedin.com/in/vietnguyen09/">
+        Viet Nguyen
       </Link>{' '}
       {new Date().getFullYear()}.
     </Typography>
