@@ -8,6 +8,7 @@ export interface VideoItemProps {
   youtubeId: string;
   title: string;
   description: string;
+  shared_by?: string;
 }
 
 export const insertVideo = async (params: VideoItemProps) => {
@@ -17,6 +18,7 @@ export const insertVideo = async (params: VideoItemProps) => {
       youtubeId: params?.youtubeId ?? '',
       title: params?.title ?? '',
       description: params?.description ?? '',
+      shared_by: params?.shared_by ?? '',
       created_at: getTimestamp(),
     });
   } catch (error: any) {
