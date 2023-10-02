@@ -2,13 +2,28 @@
 
 import Container from '@mui/material/Container';
 import * as React from 'react';
+import { useEffect, useState } from 'react';
 
-import { VideoItem } from '@/components/Videos/Item';
+import { Loader } from '@/components/Loader';
+import { VideoList } from '@/components/Videos/List';
+import type { VideoItemResponseProps } from '@/shared/type';
 
 export default function Home() {
+  const [videos, setVideos] = useState<VideoItemResponseProps[]>([]);
+
+  useEffect(() => {
+    (async () => {
+      const response = await fetch('/api/videos/get');
+      const data = await response.json();
+      setVideos(data);
+    })();
+  }, []);
+
+  if (!videos.length) return <Loader />;
+
   return (
     <Container maxWidth="md" component="main">
-      <VideoItem youtubeId="1uzlBSL7-UM" title="" description="" sharedBy="" />
+      <VideoList videos={videos} />
     </Container>
   );
 }

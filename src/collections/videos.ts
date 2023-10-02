@@ -1,15 +1,9 @@
 /* eslint-disable consistent-return */
 import connectToDatabase from '@/lib/mongodb';
 import { VideosModel } from '@/models/Videos';
+import type { QueryProps, VideoItemProps } from '@/shared/type';
 import { getTimestamp } from '@/utils/common';
 import { throwErrors } from '@/utils/errorHandle';
-
-export interface VideoItemProps {
-  youtubeId: string;
-  title: string;
-  description: string;
-  shared_by?: string;
-}
 
 export const insertVideo = async (params: VideoItemProps) => {
   try {
@@ -26,13 +20,14 @@ export const insertVideo = async (params: VideoItemProps) => {
   }
 };
 
-export const findVideosByParams = async (
-  params: Record<string, any> = {},
-  options: Record<string, any> = {},
-) => {
+export const findVideosByParams = async ({
+  filter,
+  projection,
+  options,
+}: QueryProps) => {
   try {
     await connectToDatabase();
-    return await VideosModel.find(params, options);
+    return await VideosModel.find(filter, projection, options);
   } catch (error: any) {
     throwErrors(`findVideosByParams: ${error}`);
   }
