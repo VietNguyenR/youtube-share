@@ -16,12 +16,9 @@ export default withAuth(
     }
 
     if (isAuthPage && isAuth) {
-      return NextResponse.redirect(new URL('/dashboard', req.url));
+      return NextResponse.redirect(new URL('/', req.url));
     }
 
-    if (!isAuthPage && !isAuth) {
-      return NextResponse.redirect(new URL('/signin', req.url));
-    }
     return NextResponse.next();
   },
   {
