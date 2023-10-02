@@ -1,17 +1,15 @@
 import { model, models, Schema } from 'mongoose';
 
-const UserSchema: Schema = new Schema({
-  username: {
+const VideosSchema: Schema = new Schema({
+  youtubeId: {
     type: String,
     required: true,
-    unique: true,
   },
-  email: {
+  title: {
     type: String,
     required: true,
-    unique: true,
   },
-  password: {
+  description: {
     type: String,
     required: true,
   },
@@ -20,4 +18,4 @@ const UserSchema: Schema = new Schema({
   },
 });
 
-export const UserModel = models.User || model('User', UserSchema);
+export const VideosModel = models.User || model('User', VideosSchema);
