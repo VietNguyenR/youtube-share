@@ -2,7 +2,7 @@ export const isFieldError = (
   field: string,
   errorsMessage: Record<string, any>,
 ) => {
-  if (!errorsMessage) return {};
+  if (!errorsMessage || errorsMessage?.length <= 0) return {};
   const findTheField = errorsMessage.filter(
     (error: Record<string, any>) => error && error.path[0] === field,
   )[0];

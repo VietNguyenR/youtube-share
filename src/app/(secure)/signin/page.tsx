@@ -75,6 +75,7 @@ export default function SignIn() {
               label="Email Address / Username"
               name="signinId"
               autoFocus
+              data-testid="signinId"
             />
             <TextField
               margin="normal"
@@ -84,6 +85,7 @@ export default function SignIn() {
               label="Password"
               type="password"
               id="password"
+              data-testid="password"
             />
             <Button
               type="submit"

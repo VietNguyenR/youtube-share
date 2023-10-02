@@ -33,7 +33,8 @@ export default function SignUp() {
       body: payload,
     });
     const { error: errorsResponse } = await signupRequest.json();
-    if (!errorsResponse) router.push('/signin');
+
+    if (!errorsResponse) router.replace('/signin');
     setErrorsMessage(errorsResponse);
   };
 
