@@ -20,7 +20,9 @@ export const authOptions: AuthOptions = {
           ? credentials?.email
           : credentials?.username;
         const user = await findOneUserByParams({
-          [idForSignin]: signinId,
+          filter: {
+            [idForSignin]: signinId,
+          },
         });
         if (typeof user === undefined) return null;
         if (bcrypt.compareSync(credentials.password, user?.password)) {
