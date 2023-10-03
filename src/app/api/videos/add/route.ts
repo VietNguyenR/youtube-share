@@ -27,3 +27,4 @@ export async function POST(request: NextRequest) {
   insertVideo(formData);
   return NextResponse.json({ success: true });
 }
+export const dynamic = 'force-dynamic';

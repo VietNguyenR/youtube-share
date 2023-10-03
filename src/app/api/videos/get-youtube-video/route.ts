@@ -44,3 +44,4 @@ export async function POST(request: NextRequest) {
     description: videoDescription,
   });
 }
+export const dynamic = 'force-dynamic';
