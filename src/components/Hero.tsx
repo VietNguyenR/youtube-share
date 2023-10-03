@@ -2,9 +2,12 @@
 
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
+import { usePathname } from 'next/navigation';
 import * as React from 'react';
 
 export function Hero() {
+  const pathname = usePathname();
+  if (pathname !== '/') return null;
   return (
     <Container
       disableGutters
