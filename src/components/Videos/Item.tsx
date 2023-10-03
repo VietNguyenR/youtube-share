@@ -13,11 +13,11 @@ export function VideoItem({
   shared_by,
 }: VideoItemProps) {
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={6} md={4} sx={{ height: 180 }}>
+    <Grid container spacing={2} flexDirection={{ xs: 'column', sm: 'row' }}>
+      <Grid item xs={12} sm={5} md={4}>
         <YoutubeEmbed embedId={youtubeId} />
       </Grid>
-      <Grid container item xs={6} md={8} alignContent="start">
+      <Grid container item xs={12} sm={7} md={8} alignContent="start">
         <Typography variant="h5" component="h2" color="red">
           {title ?? 'Youtube video title'}
         </Typography>

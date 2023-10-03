@@ -28,7 +28,14 @@ export function VideoList({ videos }: VideoListProps) {
       )}
       {haveVideos &&
         videos.map((video) => (
-          <Grid item key={video._id.toString()}>
+          <Grid
+            item
+            key={video._id.toString()}
+            sx={{
+              borderBottom: (theme) => `1px solid ${theme.palette.divider}`,
+              pb: 2,
+            }}
+          >
             <VideoItem {...video} />
           </Grid>
         ))}

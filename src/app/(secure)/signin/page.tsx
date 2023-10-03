@@ -18,12 +18,14 @@ import { useState } from 'react';
 
 export default function SignIn() {
   const [signinError, setSigninError] = useState<boolean>(false);
+  const [buttonDisable, setButtonDisable] = useState<boolean>(false);
   const router = useRouter();
 
   // eslint-disable-next-line consistent-return
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setSigninError(false);
+    setButtonDisable(true);
     const data = new FormData(event.currentTarget);
     const signinId = data?.get('signinId') as string;
     const idForSignin = signinId.includes('@') ? 'email' : 'username';
@@ -32,7 +34,7 @@ export default function SignIn() {
       [idForSignin]: signinId,
       password: data?.get('password') as string,
     });
-
+    setButtonDisable(false);
     if (!signinRequest?.error) {
       return router.replace('/');
     }
@@ -93,6 +95,7 @@ export default function SignIn() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              disabled={buttonDisable}
             >
               Sign In
             </Button>
