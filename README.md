@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Project Overview
 
-## Getting Started
+Welcome to our Next.js Video Sharing Application! Crafted to provide a streamlined experience, this innovative platform allows users to share and discover captivating YouTube videos effortlessly. With features allowing easy registration and sign-in, users can post YouTube video links that the application automatically processes to retrieve essential video information. The fusion of Next.js's robustness and MongoDB's flexibility ensures a high-performance, user-centric application.
 
-First, run the development server:
+### Key Features
+
+- **User Authentication:** Offers a fortified registration and sign-in process, safeguarding data privacy and security.
+- **Video Sharing:** Empowers users to share YouTube video links directly on the platform with ease.
+- **Automated Video Information Retrieval:** Equipped with an automatic extraction feature that displays video information from YouTube, amplifying the user experience.
+- **MongoDB Integration:** Assures efficient and secure storage of user and video data, underlining data integrity and easy accessibility.
+
+## Prerequisites
+
+To harness the full capacity of our application, ensure the installation of the following software and tools:
+
+- **Git:** A potent, open-source, distributed version control system adept at managing projects of varied scales efficiently. Follow [this guide](https://github.com/git-guides/install-git) to install Git.
+
+- **Node.js:** Our application, built on Next.js, mandates the installation of Node.js. Ensure it’s version 16 or later. [Download here](https://nodejs.org/).
+
+- **pnpm:** A performant alternative to Node.js package managers. To install `pnpm`, adhere to [these instructions](https://pnpm.io/installation).
+
+- **Docker:** An essential open-source platform for containerizing applications. This project specifically requires Docker for rapid MongoDB deployment in the development environment, along with `docker-compose`. Follow [this guide](https://docs.docker.com/compose/install/) for installation.
+
+## Installation & Configuration
+
+Post the installation of the required tools and software, clone the project repository to your local machine using the command:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/VietNguyenR/youtube-share.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Navigate into the project folder and install all necessary dependencies with the command:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+cd youtube-share
+pnpm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Database Setup
+With all dependencies installed, activate Docker to initiate MongoDB:
+```bash
+docker-compose up
+```
 
-## Learn More
+A successful initiation will display the following message on your terminal:
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+[+] Building 0.0s (0/0)
+[+] Running 2/0
+ ✔ Container youtube-share-mongo-express-1  Running
+ ✔ Container youtube-share-mongo-1          Running
+```
+Manage data via a browser-based GUI by accessing http://localhost:8081/.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Running the Application
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+With the Docker container active, execute the following commands to visualize the project:
 
-## Deploy on Vercel
+```bash
+# For development 
+pnpm dev
+# For production build
+pnpm build && pnpm start
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+A successful run will yield the message:
+```bash
+ ▲ Next.js 13.5.3
+  - Local:        http://localhost:3000
+  - Environments: .env
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Access the application via a browser at http://localhost:3000.
+
