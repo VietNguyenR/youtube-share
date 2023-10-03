@@ -1,4 +1,6 @@
-import { Typography } from '@mui/material';
+'use client';
+
+import { Button, Typography } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import * as React from 'react';
 
@@ -12,6 +14,13 @@ export function VideoItem({
   description,
   shared_by,
 }: VideoItemProps) {
+  const [descriptionExpand, setDescriptionExpand] = React.useState(false);
+
+  const sxStyleConditions = { height: '100px', overflow: 'hidden' };
+  if (descriptionExpand) {
+    sxStyleConditions.height = 'auto';
+    sxStyleConditions.overflow = 'visible';
+  }
   return (
     <Grid container spacing={2} flexDirection={{ xs: 'column', sm: 'row' }}>
       <Grid item xs={12} sm={5} md={4}>
@@ -31,9 +40,15 @@ export function VideoItem({
           Description:
         </Typography>
         <Typography variant="body2">
-          {description
-            ? description.substring(0, 299).concat('...')
-            : 'Youtube video description'}
+          <Grid container sx={sxStyleConditions}>
+            {description && (
+              // eslint-disable-next-line react/no-danger
+              <span dangerouslySetInnerHTML={{ __html: description }} />
+            )}
+          </Grid>
+          <Button onClick={() => setDescriptionExpand(!descriptionExpand)}>
+            {descriptionExpand ? 'Show less' : 'Show more'}
+          </Button>
         </Typography>
       </Grid>
     </Grid>

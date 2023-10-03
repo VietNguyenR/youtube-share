@@ -35,9 +35,12 @@ export async function POST(request: NextRequest) {
   }
   const videoTitle =
     responseBody?.match(/<meta name="title" content="(.*?)"/)?.[1] ?? '';
-  const videoDescription =
-    responseBody?.match(/"description":{"simpleText":"(.*?)"/)?.[1] ?? '';
-
+  let videoDescription =
+    responseBody?.match(
+      /"attributedDescriptionBodyText":{"content":"(.*?)","/,
+    )?.[1] ?? '';
+  videoDescription = videoDescription.replace(/\\n/g, '<br />');
+  videoDescription = videoDescription.replace(/\\/g, '');
   return NextResponse.json({
     success: true,
     title: videoTitle,
