@@ -8,9 +8,9 @@ import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
-import Link from '@mui/material/Link';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { signIn } from 'next-auth/react';
 import * as React from 'react';
@@ -97,14 +97,11 @@ export default function SignIn() {
               Sign In
             </Button>
             <Grid container>
-              <Grid item xs>
-                <Link href="/forgot" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
               <Grid item>
-                <Link href="/signup" variant="body2">
-                  Don&apos;t have an account? Sign Up
+                <Link href="/signup">
+                  <Typography variant="body2">
+                    Don&apos;t have an account? Sign Up
+                  </Typography>
                 </Link>
               </Grid>
             </Grid>
