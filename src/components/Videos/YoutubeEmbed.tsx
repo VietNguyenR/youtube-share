@@ -1,6 +1,8 @@
 'use client';
 
-import { Grid, useMediaQuery, useTheme } from '@mui/material';
+import { Grid } from '@mui/material';
+import useTheme from '@mui/material/styles/useTheme';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import * as React from 'react';
 
 export function YoutubeEmbed({ embedId }: { embedId: string }) {
