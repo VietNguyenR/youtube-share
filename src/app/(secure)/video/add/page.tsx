@@ -13,6 +13,7 @@ import { useSession } from 'next-auth/react';
 import * as React from 'react';
 import { useState } from 'react';
 
+import { Loader } from '@/components/Loader';
 import AddVideoForm from '@/components/Videos/Add';
 import Review from '@/components/Videos/Review';
 import useSharedContext, {
@@ -34,7 +35,8 @@ export default function Add() {
   const router = useRouter();
 
   if (status === 'unauthenticated') {
-    return router.replace('/signin');
+    router.replace('/signin');
+    return <Loader />;
   }
 
   const handleNext = async () => {
