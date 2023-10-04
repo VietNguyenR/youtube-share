@@ -172,7 +172,7 @@ describe('Test AddVideo functional', () => {
     expect(screen.getByText('Video details')).toBeInTheDocument();
 
     const buttons = screen.getAllByRole('button');
-    await userEvent.click(buttons[1]);
+    await userEvent.click(buttons[0]);
     expect(screen.getByText('Share a video')).toBeInTheDocument();
   });
 });
