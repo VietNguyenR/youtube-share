@@ -46,9 +46,11 @@ export function VideoItem({
               <span dangerouslySetInnerHTML={{ __html: description }} />
             )}
           </Grid>
-          <Button onClick={() => setDescriptionExpand(!descriptionExpand)}>
-            {descriptionExpand ? 'Show less' : 'Show more'}
-          </Button>
+          {description?.length > 100 && (
+            <Button onClick={() => setDescriptionExpand(!descriptionExpand)}>
+              {descriptionExpand ? 'Show less' : 'Show more'}
+            </Button>
+          )}
         </Typography>
       </Grid>
     </Grid>

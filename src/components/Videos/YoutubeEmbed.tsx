@@ -18,6 +18,7 @@ export function YoutubeEmbed({ embedId }: { embedId: string }) {
         title="YouTube video player"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         style={{ border: 'none', width: '100%' }}
+        data-testid="youtube-embed"
       />
     </Grid>
   );

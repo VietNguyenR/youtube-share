@@ -2,7 +2,7 @@ import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import * as React from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import useSharedContext, { setYoutubeURL } from '@/shared/store';
 
@@ -13,7 +13,7 @@ export default function AddVideoForm() {
   } = useSharedContext();
   const [error, setError] = useState('');
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (!errors) return;
     if (errors.field === 'youtubeUrl') {
       setError(errors.message);
