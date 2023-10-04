@@ -6,7 +6,7 @@ import userEvent from '@testing-library/user-event';
 import fetchMock from 'jest-fetch-mock';
 import React from 'react';
 
-import SignupPage from './page';
+import SignupPage from '../app/(secure)/signup/page';
 
 var mockRouterReplace: jest.Mock = jest.fn();
 
