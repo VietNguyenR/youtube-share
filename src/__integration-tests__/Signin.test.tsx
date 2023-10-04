@@ -5,7 +5,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 
-import SigninPage from './page';
+import SigninPage from '../app/(secure)/signin/page';
 
 var mockSigninResponse: jest.Mock;
 var mockRouterReplace: jest.Mock = jest.fn();
